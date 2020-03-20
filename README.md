@@ -1,4 +1,3 @@
 # CS419MachineLearning
-TEAM DECKTM - Diana DelGaudio, Evan Heller, Chris Brefo, Kyle Malabuyoc, Tom Burns, Malav Modi 
-
+TEAM D.E.C.K.T.M. - Designing Everything Creatively, Kindly, Tremendously Magnificent
 someone change the team name, it's bad
