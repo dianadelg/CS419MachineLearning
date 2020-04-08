@@ -136,8 +136,8 @@ def main():
     print('Total: %d, Correct: %d Wrong: %d' % (total, correct, total - correct))
     print('precision: %.4f %%' % (100 * float(correct) / float(total)))
 
+    #saves the model
     torch.save(mnist_cnn, 'mnist_cnn_model.pth')
-    torch.save(mnist_cnn, 'mnist_cnn_model.pt')
 
 if __name__ == "__main__":
     main()
