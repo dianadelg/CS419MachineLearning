@@ -1,0 +1,5 @@
+python3
+pytorch
+adversarial robustness toolbox (ART)
+NumPy
+maybe tensorflow/keras
