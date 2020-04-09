@@ -30,9 +30,9 @@ def submitModel(s):
         while (l):
                 print('Sending...')
                 s.send(l)
-                l = file.read(1024)
+                l = f.read(1024)
         file.close()
-        print ('Done Sending!!')
+         print ('Done Sending!!')
         
 def Main():
     checkCridentials()

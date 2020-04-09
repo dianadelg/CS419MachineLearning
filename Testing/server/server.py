@@ -18,6 +18,7 @@ def storeSubmission(c):
         file.write(l)
         l = c.recv(1024)
         total = total + 1024
+    file.write(l)
     file.close()
     print("Done Receiving")
     
