@@ -1,8 +1,11 @@
 import socket
 import login as user
 import os
+import tqdm
 
 global res
+
+BUFFER_SIZE = 4096 # send 4096 bytes each time step
 
 def checkCridentials():
         res = False
@@ -21,18 +24,22 @@ def checkCridentials():
                 break
         
 def submitModel(s):
-        filename = 'login.py '
+        filename = 'mnist_cnn_model.pth '
         s.send(filename.encode('ascii'))
         filesize = os.stat(filename).st_size
         s.send(str(filesize).encode('ascii'))
-        file = open('login.py', 'rb')
-        l = file.read(1024)
-        while (l):
-                print('Sending...')
-                s.send(l)
-                l = file.read(1024)
-        file.close()
-        print ('Done Sending!!')
+        response = s.recv(1024)
+        if str(response.decode('ascii')) == 'ready':
+                with open(filename, "rb") as f:
+                        i = 0
+                        while (i == 0):
+                                bytes_read = f.read(BUFFER_SIZE)
+                                if not bytes_read:
+                                        i = 1
+                                if i == 0:
+                                        s.sendall(bytes_read)
+                                count += 1
+                        f.close()
         
 def Main():
     checkCridentials()
@@ -50,7 +57,7 @@ def Main():
         #if message.lower().strip() == "image":
                 
         #server.send(message.encode('ascii')) 
-  
+        print('im out2')
         # message received from server 
         data = server.recv(1024) 
   

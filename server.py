@@ -1,44 +1,44 @@
 import socket
-
+import tqdm
 from _thread import *
 import threading
 
 print_lock = threading.Lock()
 
-def storeSubmission(c):
-    data = c.recv(8)
-    filename = str(data.decode('ascii'))
-    data = c.recv(8)
-    filesize = int(data.decode('ascii'))
-    file = open(filename, 'wb')
-    l = c.recv(1024)
-    total = 1024
-    while(total <= filesize):
-        print("Receiving....")
-        file.write(l)
-        l = c.recv(1024)
-        total = total + 1024
-    file.write(l)
-    file.close()
-    print("Done Receiving")
-    
-    
+BUFFER_SIZE = 4096 # send 4096 bytes each time step
+
 def clientMain(c):
     while True:
         try:
-            data = c.recv(1024)
+            data = c.recv(16)
             message = str(data.decode('ascii'))
             if not message:
                 print('Bye')
             print('Received from the client:', message)
             if message.lower().strip() == "submission":
-                storeSubmission(c)
+                data = c.recv(1024)
+                filename = str(data.decode('ascii')).split()[0]
+                filesize = str(data.decode('ascii')).split()[1]
+                filesize = int(filesize)
+                storeSubmission(c,filesize,filename)
             response = "I got yo message bruh"
             c.send(response.encode('ascii'))
         except:
             print('Lost connection to the client')
             return
     c.close()
+def storeSubmission(c, fs, fn):
+    ready = "ready"
+    c.send(ready.encode('ascii'))
+    with open(fn, "wb") as f:
+        total = 0
+        while (total <= fs):
+            bytes_read = c.recv(BUFFER_SIZE)
+            if total <= fs:
+                f.write(bytes_read)
+            total += BUFFER_SIZE
+        f.close()
+
 
 def Main():
     host = ""
