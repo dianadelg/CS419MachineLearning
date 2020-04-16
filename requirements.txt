@@ -2,4 +2,6 @@ python3 - 64 bit and latest version!
 pytorch
 adversarial robustness toolbox (ART)
 NumPy
+pyqt5-tools
 maybe tensorflow/keras
+DB Browser

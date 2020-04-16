@@ -21,24 +21,28 @@ def clientMain(c):
                 filesize = str(data.decode('ascii')).split()[1]
                 filesize = int(filesize)
                 storeSubmission(c,filesize,filename)
-            response = "I got yo message bruh"
-            c.send(response.encode('ascii'))
         except:
             print('Lost connection to the client')
             return
     c.close()
 def storeSubmission(c, fs, fn):
-    ready = "ready"
-    c.send(ready.encode('ascii'))
-    with open(fn, "wb") as f:
-        total = 0
-        while (total <= fs):
-            bytes_read = c.recv(BUFFER_SIZE)
-            if total <= fs:
-                f.write(bytes_read)
-            total += BUFFER_SIZE
-        f.close()
-
+    try:
+        ready = "ready"
+        c.send(ready.encode('ascii'))
+        with open(fn, "wb") as f:
+            total = 0
+            while (total <= fs):
+                bytes_read = c.recv(BUFFER_SIZE)
+                if total <= fs:
+                    f.write(bytes_read)
+                total += BUFFER_SIZE
+            f.close()
+            response = "success"
+            c.send(response.encode('ascii'))
+    except:
+            print("model/image was not fully received.")
+            response = "error"
+            c.send(response.encode('ascii'))
 
 def Main():
     host = ""
