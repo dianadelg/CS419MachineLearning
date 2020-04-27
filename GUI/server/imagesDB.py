@@ -19,3 +19,10 @@ def registerImage(uN,iN):
         conn.commit()   
     except sqlite3.Error as e:
         print("Register DB Error:", e)
+
+def getImages():
+    try:
+        c.execute('''SELECT image_name FROM images''')
+        return c.fetchall()
+    except sqlite3.Error as e:
+        print(e)

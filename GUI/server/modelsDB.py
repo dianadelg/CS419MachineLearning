@@ -6,7 +6,7 @@ import os
 #Creating DB file, and creating table
 conn = sqlite3.connect('SUBMISSIONS.db')
 c = conn.cursor()
-
+admin = "admin"
 #Create table and passes if already created to avoid error
 try:
     c.execute('''CREATE TABLE models(username, model_name, model_accuracy)''')
@@ -20,22 +20,24 @@ def registerModel(uN,mN,mA):
     except sqlite3.Error as e:
         print("Register DB Error:", e)
         
-def getModels():
+def getModelsW():
     try:
-        c.execute('''SELECT model_name FROM models''')
-        return c.fetchall()
+        c.execute("SELECT model_name FROM models")
+        data = c.fetchall()
+        return data
     except sqlite3.Error as e:
         print(e)
- '''    
-def getModels():
+def getModelsB():
     try:
-        return c.fetchall()
+        c.execute("SELECT model_name FROM models WHERE username <> '" + admin + "'")
+        data = c.fetchall()
+        return data
     except sqlite3.Error as e:
-        print(e)
-        
-def getModels():
+        print(e)        
+def getModelsG():
     try:
-        return c.fetchall()
+        c.execute("SELECT model_name FROM models WHERE username = '" + admin + "'")
+        data = c.fetchall()
+        return data
     except sqlite3.Error as e:
-        print(e)
-'''
+        print(e)        

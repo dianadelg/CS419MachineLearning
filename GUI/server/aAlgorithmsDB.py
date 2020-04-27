@@ -14,7 +14,7 @@ except sqlite3.OperationalError:
 
 def registerAttack(uN,aN):
     try:
-        c.execute("INSERT INTO models(username, attack_name) VALUES(?, ?)", (uN, aN))
+        c.execute("INSERT INTO attacks(username, attack_name) VALUES(?, ?)", (uN, aN))
         conn.commit()   
     except sqlite3.Error as e:
         print("Register DB Error:", e)

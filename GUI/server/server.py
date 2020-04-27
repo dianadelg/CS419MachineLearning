@@ -6,7 +6,7 @@ import threading
 print_lock = threading.Lock()
 
 BUFFER_SIZE = 4096 # send 4096 bytes each time step
-mode = "White"
+mode = "Gray"
 uName = ""
 mAccuracy = 0
 def clientMain(c):
@@ -14,7 +14,7 @@ def clientMain(c):
     global mAccuracy
     while True:
         print("waiting for message...")
-        data = c.recv(256)
+        data = c.recv(64)
         try:
             message = str(data.decode('ascii'))
             message = message.lower().strip()
@@ -52,11 +52,30 @@ def clientMain(c):
                 filesize = str(data.decode('ascii'))
                 filesize = int(filesize)
                 storeImage(c,filesize,filename)
+            elif message == "submitattack":
+                ready = "ready"
+                c.send(ready.encode('ascii'))
+                data = c.recv(1024)
+                uName = str(data.decode('ascii'))
+                ready = "ready"
+                c.send(ready.encode('ascii'))
+                data = c.recv(1024)
+                filename = str(data.decode('ascii'))
+                data = c.recv(1024)
+                filesize = str(data.decode('ascii'))
+                filesize = int(filesize)
+                storeAttack(c,filesize,filename)
             elif message == "getmode":
                 sendMode(c)
             elif message == "updatemode":
                 updateMode(c)
             elif message == "getdataset":
+                ready = "ready"
+                c.send(ready.encode('ascii'))
+                data = c.recv(1024)
+                filename = str(data.decode('ascii'))
+                sendDataset(c,filename)
+            elif message == "getdatasetready":
                 ready = "ready"
                 c.send(ready.encode('ascii'))
                 data = c.recv(1024)
@@ -73,6 +92,24 @@ def clientMain(c):
                 storeDataset(c,filesize,filename)
             elif message == "getboard":
                 sendBoard(c)
+            elif message == "getmodels":
+                sendModels(c)
+            elif message == "getattacks":
+                sendAttacks(c)
+            elif message == "getimages":
+                sendImages(c)
+            elif message == "readygetmodels":
+                sendModels(c)
+            elif message == "readygetattacks":
+                sendAttacks(c)
+            elif message == "readygetimages":
+                sendImages(c)
+            elif message == "getmodelsready":
+                sendModels(c)
+            elif message == "getattacksready":
+                sendAttacks(c)
+            elif message == "getimagesready":
+                sendImages(c)
         except:
             print('Lost connection to the client')
             return
@@ -119,9 +156,6 @@ def storeModel(c, fs, fn):
         print("could not receive all of the model")
 
 def storeDataset(c, fs, fn):
-    import modelsDB as MDB
-    global uName
-    global mAccuracy
     try:
         ready = "ready"
         c.send(ready.encode('ascii'))
@@ -137,6 +171,26 @@ def storeDataset(c, fs, fn):
             f.close()
     except:
         print("could not receive all of the model")     
+        
+def storeAttack(c, fs, fn):
+    import aAlgorithmsDB as AADB
+    global uName
+    try:
+        ready = "ready"
+        c.send(ready.encode('ascii'))
+        direct = "Attacks/"
+        direct += fn
+        with open(direct, "wb") as f:
+            total = 0
+            while (total <= fs):
+                bytes_read = c.recv(BUFFER_SIZE)
+                if total <= fs:
+                    f.write(bytes_read)
+                total += BUFFER_SIZE
+            f.close()
+        AADB.registerAttack(uName, fn)
+    except:
+        print("could not receive all of the model") 
 
 def sendDataset(c, fn):
         direct = "Datasets/"
@@ -159,9 +213,6 @@ def sendDataset(c, fn):
         except:
                 print("There was an error with the filename. Please try another one or type it in correctly.")
 
-def sendMode(c):
-    c.send(mode.encode('ascii'))
-
 def sendBoard(c):
     import leaderboardDB as LDB
     info = LDB.getLeaderboard()
@@ -175,14 +226,62 @@ def sendBoard(c):
                 c.send(info[i][j].encode())
             j += 1
         i += 1
-    
-    
+  
+def sendAttacks(c):
+    import aAlgorithmsDB as AADB
+    try:
+        info = AADB.getAttacks()
+        i = 0
+        while i < len(info):
+            response = c.recv(1024)#wait for the server response to be ready
+            if str(response.decode()) == 'ready':
+                c.send(info[i][0].encode())
+            i += 1
+        bye = "bye"
+        c.send(bye.encode())
+    except Exception as error:
+        print(e)
+
+def sendModels(c):
+    import modelsDB as MDB
+    try:
+        if mode == "White":
+            info = MDB.getModelsW()
+        elif mode == "Gray":
+            info = MDB.getModelsG()
+        elif mode == "Black":
+            info = MDB.getModelsB()
+        i = 0
+        while i < len(info):
+            c.send(info[i][0].encode())
+            i += 1
+        bye = "bye"
+        c.send(bye.encode())
+    except Exception as error:
+        print(e)
+        
+def sendImages(c):
+    import imagesDB as IDB
+    try:
+        info = IDB.getImages()
+        i = 0
+        while i < len(info):
+            c.send(info[i][0].encode())
+            i += 1
+        bye = "bye"
+        c.send(bye.encode())
+    except Exception as error:
+        print(e)
+
 def updateMode(c):
     ready = "ready"
     c.send(ready.encode('ascii'))
     newMode = c.recv(32)
     global mode
     mode = str(newMode.decode('ascii'))
+
+def sendMode(c):
+    c.send(mode.encode('ascii'))
 
 def Main():
     host = ""

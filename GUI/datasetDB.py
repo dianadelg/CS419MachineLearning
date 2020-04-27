@@ -15,7 +15,7 @@ except sqlite3.OperationalError:
 
 def registerDataset(uN, dN):
      try:
-        c.execute("INSERT INTO datasets(username, datasetName) VALUES(?, ?)", (uN, dN))
+        c.execute("INSERT INTO datasets(username, datasetName) VALUES(?, ?)", ("admin", dN))
         conn.commit()   
      except sqlite3.Error as e:
         print("Register DB Error:", e)
