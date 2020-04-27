@@ -1,0 +1,215 @@
+C:\Users\tjbur\Google Drive\College\Spring 2020\Computer Security\CS419MachineLearning>E:/Programming/Python37/python.exe "c:/Users/tjbur/Google Drive/College/Spring 2020/Computer Security/CS419MachineLearning/attack_defense/mnist_poison_detection.py"
+Using TensorFlow backend.
+2020-04-27 17:54:54.309614: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_100.dll
+WARNING:tensorflow:From E:\Programming\Python37\lib\site-packages\tensorflow_core\python\ops\resource_variable_ops.py:1630: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+WARNING:tensorflow:From E:\Programming\Python37\lib\site-packages\keras\backend\tensorflow_backend.py:4070: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
+
+2020-04-27 17:54:56.481187: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library nvcuda.dll
+2020-04-27 17:54:56.502168: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: GeForce GTX 1080 major: 6 minor: 1 memoryClockRate(GHz): 1.8475
+pciBusID: 0000:01:00.0
+2020-04-27 17:54:56.508252: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_100.dll
+2020-04-27 17:54:56.514166: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cublas64_100.dll
+2020-04-27 17:54:56.521574: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cufft64_100.dll
+2020-04-27 17:54:56.529218: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library curand64_100.dll
+2020-04-27 17:54:56.543381: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusolver64_100.dll
+2020-04-27 17:54:56.551442: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusparse64_100.dll
+2020-04-27 17:54:56.569098: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudnn64_7.dll
+2020-04-27 17:54:56.578223: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2020-04-27 17:54:56.581486: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
+2020-04-27 17:54:56.593755: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: GeForce GTX 1080 major: 6 minor: 1 memoryClockRate(GHz): 1.8475
+pciBusID: 0000:01:00.0
+2020-04-27 17:54:56.604185: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudart64_100.dll
+2020-04-27 17:54:56.619054: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cublas64_100.dll
+2020-04-27 17:54:56.629162: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cufft64_100.dll
+2020-04-27 17:54:56.633826: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library curand64_100.dll
+2020-04-27 17:54:56.642310: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusolver64_100.dll
+2020-04-27 17:54:56.654123: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cusparse64_100.dll
+2020-04-27 17:54:56.659339: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudnn64_7.dll
+2020-04-27 17:54:56.669751: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1746] Adding visible gpu devices: 0
+2020-04-27 17:54:57.134391: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-04-27 17:54:57.139639: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      0
+2020-04-27 17:54:57.142867: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1178] 0:   N 
+2020-04-27 17:54:57.146269: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1304] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 6354 MB memory) -> physical GPU (device: 0, name: GeForce GTX 1080, pci bus id: 0000:01:00.0, compute capability: 6.1)
+WARNING:tensorflow:From E:\Programming\Python37\lib\site-packages\keras\backend\tensorflow_backend.py:422: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.
+
+Epoch 1/30
+2020-04-27 17:54:57.989165: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cublas64_100.dll
+2020-04-27 17:54:58.167955: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library cudnn64_7.dll
+2020-04-27 17:54:58.809748: W tensorflow/stream_executor/cuda/redzone_allocator.cc:312] Internal: Invoking ptxas not supported on Windows
+Relying on driver to perform ptx compilation. This message will be only logged once.
+58/58 [==============================] - 1s 25ms/step - loss: 1.4439 - accuracy: 0.4824
+Epoch 2/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.6422 - accuracy: 0.7702
+Epoch 3/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.3518 - accuracy: 0.8904
+Epoch 4/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.2575 - accuracy: 0.9225
+Epoch 5/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.1894 - accuracy: 0.9429
+Epoch 6/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.1524 - accuracy: 0.9527
+Epoch 7/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.1230 - accuracy: 0.9620
+Epoch 8/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.1227 - accuracy: 0.9608
+Epoch 9/30
+58/58 [==============================] - 1s 9ms/step - loss: 0.0922 - accuracy: 0.9723
+Epoch 10/30
+58/58 [==============================] - 1s 9ms/step - loss: 0.0856 - accuracy: 0.9725
+Epoch 11/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0819 - accuracy: 0.9745
+Epoch 12/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0734 - accuracy: 0.9770
+Epoch 13/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0693 - accuracy: 0.9778
+Epoch 14/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0697 - accuracy: 0.9779
+Epoch 15/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0534 - accuracy: 0.9834
+Epoch 16/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0585 - accuracy: 0.9821
+Epoch 17/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0553 - accuracy: 0.9802
+Epoch 18/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0411 - accuracy: 0.9871
+Epoch 19/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0448 - accuracy: 0.9846
+Epoch 20/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0462 - accuracy: 0.9849
+Epoch 21/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0423 - accuracy: 0.9860
+Epoch 22/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0411 - accuracy: 0.9863
+Epoch 23/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0371 - accuracy: 0.9867
+Epoch 24/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0374 - accuracy: 0.9871
+Epoch 25/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0334 - accuracy: 0.9895
+Epoch 26/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0360 - accuracy: 0.9871
+Epoch 27/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0301 - accuracy: 0.9903
+Epoch 28/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0317 - accuracy: 0.9890
+Epoch 29/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0312 - accuracy: 0.9890
+Epoch 30/30
+58/58 [==============================] - 0s 8ms/step - loss: 0.0341 - accuracy: 0.9863
+
+Test accuracy: 97.53%
+
+Poisonous test set accuracy (i.e. effectiveness of poison): 96.89%
+
+Clean test set accuracy: 97.85%
+------------------- Results using size metric -------------------
+{'nb_clusters': 2, 'clustering_method': 'KMeans', 'nb_dims': 10, 'reduce': 'PCA', 'cluster_analysis': 'smaller'}
+Evaluation defence results for size-based metric: 
+class_0
+{'FalseNegative': {'denominator': 234, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 476, 'numerator': 0, 'rate': 0.0},
+ 'TrueNegative': {'denominator': 476, 'numerator': 476, 'rate': 100.0},
+ 'TruePositive': {'denominator': 234, 'numerator': 234, 'rate': 100.0}}
+class_1
+{'FalseNegative': {'denominator': 272, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 552, 'numerator': 0, 'rate': 0.0},
+ 'TrueNegative': {'denominator': 552, 'numerator': 552, 'rate': 100.0},
+ 'TruePositive': {'denominator': 272, 'numerator': 272, 'rate': 100.0}}
+class_2
+{'FalseNegative': {'denominator': 269, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 546, 'numerator': 4, 'rate': 0.73},
+ 'TrueNegative': {'denominator': 546, 'numerator': 542, 'rate': 99.27},
+ 'TruePositive': {'denominator': 269, 'numerator': 269, 'rate': 100.0}}
+class_3
+{'FalseNegative': {'denominator': 250, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 507, 'numerator': 2, 'rate': 0.39},
+ 'TrueNegative': {'denominator': 507, 'numerator': 505, 'rate': 99.61},
+ 'TruePositive': {'denominator': 250, 'numerator': 250, 'rate': 100.0}}
+class_4
+{'FalseNegative': {'denominator': 228, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 463, 'numerator': 0, 'rate': 0.0},
+ 'TrueNegative': {'denominator': 463, 'numerator': 463, 'rate': 100.0},
+ 'TruePositive': {'denominator': 228, 'numerator': 228, 'rate': 100.0}}
+class_5
+{'FalseNegative': {'denominator': 241, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 490, 'numerator': 0, 'rate': 0.0},
+ 'TrueNegative': {'denominator': 490, 'numerator': 490, 'rate': 100.0},
+ 'TruePositive': {'denominator': 241, 'numerator': 241, 'rate': 100.0}}
+class_6
+{'FalseNegative': {'denominator': 242, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 491, 'numerator': 0, 'rate': 0.0},
+ 'TrueNegative': {'denominator': 491, 'numerator': 491, 'rate': 100.0},
+ 'TruePositive': {'denominator': 242, 'numerator': 242, 'rate': 100.0}}
+class_7
+{'FalseNegative': {'denominator': 259, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 525, 'numerator': 0, 'rate': 0.0},
+ 'TrueNegative': {'denominator': 525, 'numerator': 525, 'rate': 100.0},
+ 'TruePositive': {'denominator': 259, 'numerator': 259, 'rate': 100.0}}
+class_8
+{'FalseNegative': {'denominator': 236, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 480, 'numerator': 0, 'rate': 0.0},
+ 'TrueNegative': {'denominator': 480, 'numerator': 480, 'rate': 100.0},
+ 'TruePositive': {'denominator': 236, 'numerator': 236, 'rate': 100.0}}
+class_9
+{'FalseNegative': {'denominator': 231, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 470, 'numerator': 1, 'rate': 0.21},
+ 'TrueNegative': {'denominator': 470, 'numerator': 469, 'rate': 99.79},
+ 'TruePositive': {'denominator': 231, 'numerator': 231, 'rate': 100.0}}
+Visualize clusters
+------------------- Results using distance metric -------------------
+{'nb_clusters': 2, 'clustering_method': 'KMeans', 'nb_dims': 10, 'reduce': 'PCA', 'cluster_analysis': 'smaller'}
+Evaluation defence results for distance-based metric: 
+class_0
+{'FalseNegative': {'denominator': 234, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 476, 'numerator': 476, 'rate': 100.0},
+ 'TrueNegative': {'denominator': 476, 'numerator': 0, 'rate': 0.0},
+ 'TruePositive': {'denominator': 234, 'numerator': 234, 'rate': 100.0}}
+class_1
+{'FalseNegative': {'denominator': 272, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 552, 'numerator': 0, 'rate': 0.0},
+ 'TrueNegative': {'denominator': 552, 'numerator': 552, 'rate': 100.0},
+ 'TruePositive': {'denominator': 272, 'numerator': 272, 'rate': 100.0}}
+class_2
+{'FalseNegative': {'denominator': 269, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 546, 'numerator': 4, 'rate': 0.73},
+ 'TrueNegative': {'denominator': 546, 'numerator': 542, 'rate': 99.27},
+ 'TruePositive': {'denominator': 269, 'numerator': 269, 'rate': 100.0}}
+class_3
+{'FalseNegative': {'denominator': 250, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 507, 'numerator': 507, 'rate': 100.0},
+ 'TrueNegative': {'denominator': 507, 'numerator': 0, 'rate': 0.0},
+ 'TruePositive': {'denominator': 250, 'numerator': 250, 'rate': 100.0}}
+class_4
+{'FalseNegative': {'denominator': 228, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 463, 'numerator': 463, 'rate': 100.0},
+ 'TrueNegative': {'denominator': 463, 'numerator': 0, 'rate': 0.0},
+ 'TruePositive': {'denominator': 228, 'numerator': 228, 'rate': 100.0}}
+class_5
+{'FalseNegative': {'denominator': 241, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 490, 'numerator': 490, 'rate': 100.0},
+ 'TrueNegative': {'denominator': 490, 'numerator': 0, 'rate': 0.0},
+ 'TruePositive': {'denominator': 241, 'numerator': 241, 'rate': 100.0}}
+class_6
+{'FalseNegative': {'denominator': 242, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 491, 'numerator': 491, 'rate': 100.0},
+ 'TrueNegative': {'denominator': 491, 'numerator': 0, 'rate': 0.0},
+ 'TruePositive': {'denominator': 242, 'numerator': 242, 'rate': 100.0}}
+class_7
+{'FalseNegative': {'denominator': 259, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 525, 'numerator': 525, 'rate': 100.0},
+ 'TrueNegative': {'denominator': 525, 'numerator': 0, 'rate': 0.0},
+ 'TruePositive': {'denominator': 259, 'numerator': 259, 'rate': 100.0}}
+class_8
+{'FalseNegative': {'denominator': 236, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 480, 'numerator': 480, 'rate': 100.0},
+ 'TrueNegative': {'denominator': 480, 'numerator': 0, 'rate': 0.0},
+ 'TruePositive': {'denominator': 236, 'numerator': 236, 'rate': 100.0}}
+class_9
+{'FalseNegative': {'denominator': 231, 'numerator': 0, 'rate': 0.0},
+ 'FalsePositive': {'denominator': 470, 'numerator': 470, 'rate': 100.0},
+ 'TrueNegative': {'denominator': 470, 'numerator': 0, 'rate': 0.0},
+ 'TruePositive': {'denominator': 231, 'numerator': 231, 'rate': 100.0}}

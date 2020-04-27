@@ -65,10 +65,10 @@ classifier = KerasClassifier(build_model(), clip_values=(0, 1), use_logits=False
 
 # Create attack for adversarial trainer; here, we use 2 attacks, both crafting adv examples on the target model
 pgd = ProjectedGradientDescent(classifier, eps=8, eps_step=2, max_iter=10, num_random_init=20)
-
+print("check1")
 # Create some adversarial samples for evaluation
 x_test_pgd = pgd.generate(x_test)
-
+print("check2")
 # Create adversarial trainer and perform adversarial training
 adv_trainer = AdversarialTrainer(classifier, attacks=pgd, ratio=1.0)
 adv_trainer.fit_generator(art_datagen, nb_epochs=83)

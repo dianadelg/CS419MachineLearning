@@ -62,8 +62,10 @@ classifier.fit(x_train, y_train, nb_epochs=10, batch_size=128)
 # Craft adversarial samples with DeepFool
 logger.info("Create DeepFool attack")
 adv_crafter = DeepFool(classifier)
+print("check1")
 logger.info("Craft attack on training examples")
 x_train_adv = adv_crafter.generate(x_train)
+print("check2")
 logger.info("Craft attack test examples")
 x_test_adv = adv_crafter.generate(x_test)
 

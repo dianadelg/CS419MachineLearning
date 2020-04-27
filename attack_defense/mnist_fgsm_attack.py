@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 epsilons = [0, .05, .1, .15, .2, .25, .3, .35, .40, .45, .5]
-pretrained_model = "./Pretrained Models/lenet_mnist_model.pth"
+pretrained_model = "../Pretrained Models/lenet_mnist_model.pth"
 use_cuda=True
 
 # LeNet Model definition

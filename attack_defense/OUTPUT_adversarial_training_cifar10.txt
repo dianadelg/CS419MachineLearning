@@ -1,0 +1,87 @@
+C:\Users\tjbur\Google Drive\College\Spring 2020\Computer Security\CS419MachineLearning>E:/Programming/Python37/python.exe "c:/Users/tjbur/Google Drive/College/Spring 2020/Computer Security/CS419MachineLearning/attack_defense/adversarial_training_cifar10.py"
+Using TensorFlow backend.
+2020-04-27 16:52:47.951812: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cudart64_100.dll'; dlerror: cudart64_100.dll not found
+2020-04-27 16:52:47.958036: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+WARNING:tensorflow:From E:\Programming\Python37\lib\site-packages\tensorflow_core\python\ops\resource_variable_ops.py:1630: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+[WARNING] From E:\Programming\Python37\lib\site-packages\tensorflow_core\python\ops\resource_variable_ops.py:1630: calling BaseResourceVariable.__init__ (from tensorflow.python.ops.resource_variable_ops) with constraint is deprecated and will be removed in a future version.
+Instructions for updating:
+If using Keras pass *_constraint arguments to layers.
+WARNING:tensorflow:From E:\Programming\Python37\lib\site-packages\keras\backend\tensorflow_backend.py:4070: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
+
+[WARNING] From E:\Programming\Python37\lib\site-packages\keras\backend\tensorflow_backend.py:4070: The name tf.nn.max_pool is deprecated. Please use tf.nn.max_pool2d instead.
+
+2020-04-27 16:52:50.614176: I tensorflow/stream_executor/platform/default/dso_loader.cc:44] Successfully opened dynamic library nvcuda.dll
+2020-04-27 16:52:50.638294: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1618] Found device 0 with properties: 
+name: GeForce GTX 1080 major: 6 minor: 1 memoryClockRate(GHz): 1.8475
+pciBusID: 0000:01:00.0
+2020-04-27 16:52:50.645839: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cudart64_100.dll'; dlerror: cudart64_100.dll not found
+2020-04-27 16:52:50.655785: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cublas64_100.dll'; dlerror: cublas64_100.dll not found
+2020-04-27 16:52:50.662938: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cufft64_100.dll'; dlerror: cufft64_100.dll not found
+2020-04-27 16:52:50.675436: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'curand64_100.dll'; dlerror: curand64_100.dll not found
+2020-04-27 16:52:50.694068: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cusolver64_100.dll'; dlerror: cusolver64_100.dll not found
+2020-04-27 16:52:50.705917: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cusparse64_100.dll'; dlerror: cusparse64_100.dll not found
+2020-04-27 16:52:50.717738: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll not found
+2020-04-27 16:52:50.730160: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1641] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like 
+to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2020-04-27 16:52:50.755939: I tensorflow/core/platform/cpu_feature_guard.cc:142] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2
+2020-04-27 16:52:50.768810: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1159] Device interconnect StreamExecutor with strength 1 edge matrix:
+2020-04-27 16:52:50.776729: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1165]      
+WARNING:tensorflow:From E:\Programming\Python37\lib\site-packages\keras\backend\tensorflow_backend.py:422: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.
+
+[WARNING] From E:\Programming\Python37\lib\site-packages\keras\backend\tensorflow_backend.py:422: The name tf.global_variables is deprecated. Please use tf.compat.v1.global_variables instead.
+
+[INFO] Inferred 17 hidden layers on Keras classifier.
+Epoch 1/10
+39/39 [==============================] - 6s 158ms/step - loss: 2.1743 - accuracy: 0.1783
+Epoch 2/10
+39/39 [==============================] - 6s 154ms/step - loss: 1.8737 - accuracy: 0.3071
+Epoch 3/10
+39/39 [==============================] - 6s 154ms/step - loss: 1.7300 - accuracy: 0.3684
+Epoch 4/10
+39/39 [==============================] - 6s 154ms/step - loss: 1.6162 - accuracy: 0.4117
+Epoch 5/10
+39/39 [==============================] - 6s 154ms/step - loss: 1.4800 - accuracy: 0.4627
+Epoch 6/10
+39/39 [==============================] - 6s 156ms/step - loss: 1.3940 - accuracy: 0.5012
+Epoch 7/10
+39/39 [==============================] - 6s 165ms/step - loss: 1.3338 - accuracy: 0.5210
+Epoch 8/10
+39/39 [==============================] - 6s 155ms/step - loss: 1.2696 - accuracy: 0.5455
+Epoch 9/10
+39/39 [==============================] - 6s 154ms/step - loss: 1.2092 - accuracy: 0.5611
+Epoch 10/10
+39/39 [==============================] - 6s 165ms/step - loss: 1.1258 - accuracy: 0.6016
+[INFO] Create DeepFool attack
+check1
+[INFO] Craft attack on training examples
+[INFO] Success rate of DeepFool attack: 89.62%
+check2
+[INFO] Craft attack test examples
+[INFO] Success rate of DeepFool attack: 88.80%
+[INFO] Classifier before adversarial training
+[INFO] Accuracy on adversarial samples: 27.20%
+Epoch 1/10
+78/78 [==============================] - 12s 160ms/step - loss: 1.3687 - accuracy: 0.4901
+Epoch 2/10
+78/78 [==============================] - 12s 159ms/step - loss: 1.1902 - accuracy: 0.5594
+Epoch 3/10
+78/78 [==============================] - 13s 162ms/step - loss: 1.0787 - accuracy: 0.5979
+Epoch 4/10
+78/78 [==============================] - 12s 158ms/step - loss: 0.9385 - accuracy: 0.6581
+Epoch 5/10
+78/78 [==============================] - 12s 159ms/step - loss: 0.8240 - accuracy: 0.7028
+Epoch 6/10
+78/78 [==============================] - 12s 159ms/step - loss: 0.7296 - accuracy: 0.7394
+Epoch 7/10
+78/78 [==============================] - 12s 158ms/step - loss: 0.6256 - accuracy: 0.7794
+Epoch 8/10
+78/78 [==============================] - 12s 157ms/step - loss: 0.5448 - accuracy: 0.8087
+Epoch 9/10
+78/78 [==============================] - 13s 163ms/step - loss: 0.4733 - accuracy: 0.8340
+Epoch 10/10
+78/78 [==============================] - 13s 164ms/step - loss: 0.4083 - accuracy: 0.8556
+[INFO] Classifier with adversarial training
+[INFO] Accuracy on adversarial samples: 53.60%
