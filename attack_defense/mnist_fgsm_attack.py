@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 epsilons = [0, .05, .1, .15, .2, .25, .3, .35, .40, .45, .5]
-pretrained_model = "Pretrained Models/lenet_mnist_model.pth"
+pretrained_model = "./Pretrained Models/lenet_mnist_model.pth"
 use_cuda=True
 
 # LeNet Model definition
@@ -137,7 +137,7 @@ for eps in epsilons:
 plt.figure(figsize=(5,5))
 plt.plot(epsilons, accuracies, "*-")
 plt.yticks(np.arange(0, 1.1, step=0.1))
-plt.xticks(np.arange(0, .35, step=0.05))
+plt.xticks(np.arange(0, .5, step=0.05))
 plt.title("Accuracy vs Epsilon")
 plt.xlabel("Epsilon")
 plt.ylabel("Accuracy")

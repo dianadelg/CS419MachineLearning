@@ -67,6 +67,13 @@ class MNIST_CNN(nn.Module):
 #Main function
 def main():
 
+    if torch.cuda.is_available():
+        device = torch.device("cuda:0")  # you can continue going on here, like cuda:1 cuda:2....etc. 
+        print("Running on the GPU")
+    else:
+        device = torch.device("cpu")
+        print("Running on the CPU")
+
     #Define training data information
     epoch_times = 20
     learning_rate = 0.0001
