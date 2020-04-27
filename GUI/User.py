@@ -1,24 +1,90 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'User.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.2
-#
-# WARNING! All changes made in this file will be lost!
+import datasetDB as DDB
+from PyQt5 import QtWidgets, QtCore, QtGui
 
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-
-
-class Ui_UWindow(object):
+class Ui_UWindow(object):          
+    def loadDatasets(self):
+        try:
+            dataList = DDB.getDatasets()
+            for x in dataList:
+                self.datasetList.addItem(x[0])
+        except Exception as e:
+            print(e)
+            
     def setupUi(self, UWindow):
         UWindow.setObjectName("UWindow")
-        UWindow.resize(1000, 1000)
+        UWindow.resize(1000, 1200)
         self.centralwidget = QtWidgets.QWidget(UWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(150, 160, 101, 61))
-        self.label.setObjectName("label")
+        self.userWelcome = QtWidgets.QLineEdit(self.centralwidget)
+        self.userWelcome.setEnabled(False)
+        self.userWelcome.setGeometry(QtCore.QRect(0, 0, 400, 50))
+        self.userWelcome.setObjectName("userWelcome")
+        self.boardButton = QtWidgets.QPushButton(self.centralwidget)
+        self.boardButton.setGeometry(QtCore.QRect(800, 70, 200, 70))
+        self.boardButton.setObjectName("boardButton")
+        self.signOutButton = QtWidgets.QPushButton(self.centralwidget)
+        self.signOutButton.setGeometry(QtCore.QRect(800, 0, 200, 60))
+        self.signOutButton.setObjectName("signOutButton")
+        self.fileButton = QtWidgets.QPushButton(self.centralwidget)
+        self.fileButton.setGeometry(QtCore.QRect(0, 100, 350, 60))
+        self.fileButton.setObjectName("fileButton")
+        self.imageLabel = QtWidgets.QLabel(self.centralwidget)
+        self.imageLabel.setGeometry(QtCore.QRect(400, 55, 200, 40))
+        self.imageLabel.setObjectName("imageName")
+        self.fileName = QtWidgets.QTextEdit(self.centralwidget)
+        self.fileName.setGeometry(QtCore.QRect(400, 100, 395, 60))
+        self.fileName.setObjectName("fileName")
+        self.modelButton = QtWidgets.QPushButton(self.centralwidget)
+        self.modelButton.setGeometry(QtCore.QRect(0, 220, 350, 60))
+        self.modelButton.setObjectName("modelButton")
+        self.modelLabel = QtWidgets.QLabel(self.centralwidget)
+        self.modelLabel.setGeometry(QtCore.QRect(400, 180, 200, 40))
+        self.modelLabel.setObjectName("modelName")
+        self.modelText = QtWidgets.QTextEdit(self.centralwidget)
+        self.modelText.setGeometry(QtCore.QRect(400, 220, 400, 60))
+        self.modelText.setObjectName("modelName")
+        self.modelALabel = QtWidgets.QLabel(self.centralwidget)
+        self.modelALabel.setGeometry(QtCore.QRect(850, 180, 200, 40))
+        self.modelALabel.setObjectName("Accuracy")
+        self.modelTextA = QtWidgets.QTextEdit(self.centralwidget)
+        self.modelTextA.setGeometry(QtCore.QRect(850, 220, 100, 60))
+        self.modelTextA.setObjectName("modelAccuracy")
+        self.datasetList = QtWidgets.QListWidget(self.centralwidget)
+        self.datasetList.setGeometry(QtCore.QRect(20, 500, 300, 600))
+        self.datasetList.setObjectName("datasetList")
+        self.dataButton = QtWidgets.QPushButton(self.centralwidget)
+        self.dataButton.setGeometry(QtCore.QRect(350, 550, 200, 60))
+        self.dataButton.setObjectName("dataButton")
+        self.loadDatasets()
+        self.queryLabel = QtWidgets.QLabel(self.centralwidget)
+        self.queryLabel.setGeometry(QtCore.QRect(0, 300, 100, 30))
+        self.queryLabel.setObjectName("queryLabel")
+        self.queryText = QtWidgets.QTextEdit(self.centralwidget)
+        self.queryText.setGeometry(QtCore.QRect(0, 340, 150, 60))
+        self.queryText.setObjectName("queryName")
+        self.queryText.setEnabled(False)
+        self.frequencyLabel = QtWidgets.QLabel(self.centralwidget)
+        self.frequencyLabel.setGeometry(QtCore.QRect(200, 300, 150, 30))
+        self.frequencyLabel.setObjectName("frequencyLabel")
+        self.frequencyText = QtWidgets.QTextEdit(self.centralwidget)
+        self.frequencyText.setGeometry(QtCore.QRect(200, 340, 150, 60))
+        self.frequencyText.setObjectName("frequencyName")
+        self.frequencyText.setEnabled(False)
+        self.outputLabel = QtWidgets.QLabel(self.centralwidget)
+        self.outputLabel.setGeometry(QtCore.QRect(600, 300, 100, 30))
+        self.outputLabel.setObjectName("outputLabel")
+        self.outputText = QtWidgets.QTextEdit(self.centralwidget)
+        self.outputText.setGeometry(QtCore.QRect(600, 340, 150, 60))
+        self.outputText.setObjectName("outputName")
+        self.outputText.setEnabled(False)
+        self.resultLabel = QtWidgets.QLabel(self.centralwidget)
+        self.resultLabel.setGeometry(QtCore.QRect(400, 300, 150, 30))
+        self.resultLabel.setObjectName("resultLabel")
+        self.resultText = QtWidgets.QTextEdit(self.centralwidget)
+        self.resultText.setGeometry(QtCore.QRect(400, 340, 150, 60))
+        self.resultText.setObjectName("resultName")
+        self.resultText.setEnabled(False)
         UWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(UWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 446, 20))
@@ -27,14 +93,24 @@ class Ui_UWindow(object):
         self.statusbar = QtWidgets.QStatusBar(UWindow)
         self.statusbar.setObjectName("statusbar")
         UWindow.setStatusBar(self.statusbar)
-
         self.retranslateUi(UWindow)
         QtCore.QMetaObject.connectSlotsByName(UWindow)
 
     def retranslateUi(self, UWindow):
         _translate = QtCore.QCoreApplication.translate
-        UWindow.setWindowTitle(_translate("UWindow", "MainWindow"))
-        self.label.setText(_translate("UWindow", "This is the User Screen"))
+        UWindow.setWindowTitle(_translate("UWindow", "User(Gray-Box Mode)"))
+        self.imageLabel.setText(_translate("UWindow", "Image Name"))
+        self.signOutButton.setText(_translate("UWindow", "Sign Out"))
+        self.boardButton.setText(_translate("UWindow", "Leaderboard"))
+        self.fileButton.setText(_translate("UWindow", "Submit an image"))
+        self.modelButton.setText(_translate("UWindow", "Submit a model"))
+        self.dataButton.setText(_translate("UWindow", "get Dataset"))
+        self.modelLabel.setText(_translate("UWindow", "Model Name"))
+        self.modelALabel.setText(_translate("UWindow", "Accuracy"))
+        self.frequencyLabel.setText(_translate("UWindow", "Frequency"))
+        self.outputLabel.setText(_translate("UWindow", "Output"))
+        self.resultLabel.setText(_translate("UWindow", "Result"))
+        self.queryLabel.setText(_translate("UWindow", "Query"))
 
 
 if __name__ == "__main__":

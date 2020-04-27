@@ -1,38 +1,13 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'SignUp.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.2
-#
-# WARNING! All changes made in this file will be lost!
-
-
+'''
+This is the signUp page GUI layout basically what happens here is a person
+can signUp on this page and then if the criteria is met they're automatically signed in
+as a user, and then redirected to the current game mode user page.Else they will be infromed that 
+the criteria isn't met and they'll have to try again.
+'''
 from PyQt5 import QtCore, QtGui, QtWidgets
-from User import Ui_UWindow
-import login as L
 
 class Ui_SUWindow(object):
-    def loginCheck(self):
-        user = self.userText.toPlainText()
-        passw = self.passText.toPlainText()
-        con = self.conText.toPlainText()
-        if con == passw:
-            res = L.register_DB(user,passw)
-            if res == "user":
-                self.userText.clear()
-                self.passText.clear()
-                self.conText.clear()
-                self.window = QtWidgets.QMainWindow()
-                self.ui = Ui_UWindow()
-                self.ui.setupUi(self.window)
-                self.hide()
-                self.window.show()
-            else:
-                self.userText.clear()
-                self.passText.clear()
-                self.conText.clear()
-                self.errorDisplay.setText("ERROR: Your passwords do not match. Please fix them!!!")
-            
+   
     def setupUi(self, SUWindow):
         SUWindow.setObjectName("SUWindow")
         SUWindow.setEnabled(True)
@@ -45,7 +20,6 @@ class Ui_SUWindow(object):
         self.signBttn = QtWidgets.QPushButton(self.centralwidget)
         self.signBttn.setGeometry(QtCore.QRect(730, 550, 100, 50))
         self.signBttn.setObjectName("signBttn")
-        self.signBttn.clicked.connect(self.loginCheck)
         self.gridLayoutWidget = QtWidgets.QWidget(self.centralwidget)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(30, 136, 800, 400))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -94,7 +68,7 @@ class Ui_SUWindow(object):
 
     def retranslateUi(self, SUWindow):
         _translate = QtCore.QCoreApplication.translate
-        SUWindow.setWindowTitle(_translate("SUWindow", "MainWindow"))
+        SUWindow.setWindowTitle(_translate("SUWindow", "SignUp"))
         self.backBttn.setText(_translate("SUWindow", "Back"))
         self.signBttn.setText(_translate("SUWindow", "Sign-Up"))
         self.userLabel.setText(_translate("SUWindow", "UserName"))

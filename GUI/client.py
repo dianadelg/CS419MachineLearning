@@ -43,7 +43,7 @@ class Ui_CWindow(object):
 
     def retranslateUi(self, CWindow):
         _translate = QtCore.QCoreApplication.translate
-        CWindow.setWindowTitle(_translate("CWindow", "MainWindow"))
+        CWindow.setWindowTitle(_translate("CWindow", "Adversarial Attack Game"))
         self.displayUser.setText(_translate("CWindow", "Would You like to Sign-in or Sign-Up?"))
         self.signInButton.setText(_translate("CWindow", "Sign-in"))
         self.signUpButton.setText(_translate("CWindow", "Sign-up"))
