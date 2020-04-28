@@ -70,6 +70,36 @@ def submitImage(IN,uName):
                 except Exception as e:
                         print("There was an error with the filename. Please try another one or type it in correctly. Or, ", e)
 
+def submitAlgorithm(aN, uName):
+        global server
+        message = "submitAttack"
+        server.send(message.encode('ascii')) 
+        response = server.recv(1024)#wait for the server response to be ready
+        if str(response.decode('ascii')) == 'ready':
+              server.send(uName.encode('ascii'))
+        response = server.recv(1024)#wait for the server response to be ready
+        if str(response.decode('ascii')) == 'ready':
+                try:
+                        filename = aN
+                        server.send(filename.encode('ascii'))#send the filename
+                        filesize = os.stat(filename).st_size#get the filesize
+                        server.send(str(filesize).encode('ascii'))#send the filesize
+                        response = server.recv(1024)#wait for the server response to be ready
+                        if str(response.decode('ascii')) == 'ready':
+                                with open(filename, "rb") as f:#start sending the contents of the file
+                                        i = 0
+                                        while (i == 0):
+                                                bytes_read = f.read(BUFFER_SIZE1)
+                                                if not bytes_read:
+                                                        i = 1
+                                                if i == 0:
+                                                        server.sendall(bytes_read)
+                                        f.close()
+                        return True
+                except Exception as e:
+                        print("There was an error with the filename. Please try another one or type it in correctly. Or,",e)
+                        return False
+
 def submitDataset(DS):
         global server
         message = "submitDataset"
@@ -120,7 +150,7 @@ def getDataset(FN):
                 f.close()
     except Exception as e:
         print(e)
-                
+         
 def getBoard():
     global server
     try:
@@ -131,13 +161,60 @@ def getBoard():
         while True:
             ready = "ready"
             server.send(ready.encode())
-            table = server.recv(16)#wait for the server response to be ready
+            table = server.recv(64)#wait for the server response to be ready
             body.append(str(table.decode()))
             if len(body)/i == 20:
                return body
     except Exception as e:
         print("error getting the board information or", e)
-    
+        
+def getAttacks():
+    global server
+    try:
+        message = "getAttacks"
+        server.send(message.encode('ascii'))
+        body = []
+        while True:
+            ready = "ready"
+            server.send(ready.encode('ascii'))
+            table = server.recv(64)#wait for the server response to be ready
+            if str(table.decode()) == "bye":
+                return body
+            else:
+                body.append(str(table.decode()))
+    except Exception as e:
+        print("error getting the board information or", e)
+
+def getModels():
+    global server
+    try:
+        message = "getModels"
+        server.send(message.encode('ascii'))
+        body = []
+        while True:
+            table = server.recv(64)#wait for the server response to be ready
+            if str(table.decode()) == "bye":
+                return body
+            else:
+                body.append(str(table.decode()))
+    except Exception as e:
+        print("error getting the board information or", e)
+
+def getImages():
+    global server
+    try:
+        message = "getImages"
+        server.send(message.encode('ascii'))
+        body = []
+        while True:
+            table = server.recv(64)#wait for the server response to be ready
+            if str(table.decode()) == "bye":
+                return body
+            else:
+                body.append(str(table.decode()))
+    except Exception as e:
+        print("error getting the board information or", e)
+
 def getMode():
     try:
         global server

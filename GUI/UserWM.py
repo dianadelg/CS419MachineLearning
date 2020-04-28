@@ -13,7 +13,7 @@ class Ui_UWMWindow(object):
 
     def setupUi(self, UWMWindow):
         UWMWindow.setObjectName("UWMWindow")
-        UWMWindow.resize(1000, 1200)
+        UWMWindow.resize(1900, 1400)
         self.centralwidget = QtWidgets.QWidget(UWMWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.userWelcome = QtWidgets.QLineEdit(self.centralwidget)
@@ -21,10 +21,10 @@ class Ui_UWMWindow(object):
         self.userWelcome.setGeometry(QtCore.QRect(0, 0, 400, 50))
         self.userWelcome.setObjectName("userWelcome")
         self.boardButton = QtWidgets.QPushButton(self.centralwidget)
-        self.boardButton.setGeometry(QtCore.QRect(800, 70, 200, 70))
+        self.boardButton.setGeometry(QtCore.QRect(1650, 70, 200, 70))
         self.boardButton.setObjectName("boardButton")
         self.signOutButton = QtWidgets.QPushButton(self.centralwidget)
-        self.signOutButton.setGeometry(QtCore.QRect(800, 0, 200, 60))
+        self.signOutButton.setGeometry(QtCore.QRect(1650, 0, 200, 60))
         self.signOutButton.setObjectName("signOutButton")
         self.fileButton = QtWidgets.QPushButton(self.centralwidget)
         self.fileButton.setGeometry(QtCore.QRect(0, 100, 350, 60))
@@ -50,19 +50,56 @@ class Ui_UWMWindow(object):
         self.modelTextA = QtWidgets.QTextEdit(self.centralwidget)
         self.modelTextA.setGeometry(QtCore.QRect(850, 220, 100, 60))
         self.modelTextA.setObjectName("modelAccuracy")
-        self.datasetList = QtWidgets.QListWidget(self.centralwidget)
-        self.datasetList.setGeometry(QtCore.QRect(20, 500, 300, 600))
-        self.datasetList.setObjectName("datasetList")
-        self.dataButton = QtWidgets.QPushButton(self.centralwidget)
-        self.dataButton.setGeometry(QtCore.QRect(350, 550, 200, 60))
-        self.dataButton.setObjectName("dataButton")
+        self.imageListLabel = QtWidgets.QLabel(self.centralwidget)#FOR THE IMAGELIST LABEL
+        self.imageListLabel.setGeometry(QtCore.QRect(600, 440, 150, 30))
+        self.imageListLabel.setObjectName("imageListLabel")#FOR THE IMAGELIST
         self.imageList = QtWidgets.QListWidget(self.centralwidget)
-        self.imageList.setGeometry(QtCore.QRect(20, 500, 300, 600))
-        self.imageList.setObjectName("datasetList")
-        self.imageButton = QtWidgets.QPushButton(self.centralwidget)
-        self.imageButton.setGeometry(QtCore.QRect(350, 550, 200, 60))
-        self.imageButton.setObjectName("imageButton")
+        self.imageList.setGeometry(QtCore.QRect(600, 475, 300, 600))
+        self.imageList.setObjectName("imageList")
+        self.modelListLabel = QtWidgets.QLabel(self.centralwidget)#FOR THE MODELLIST LABEL
+        self.modelListLabel.setGeometry(QtCore.QRect(925, 440, 150, 30))
+        self.modelListLabel.setObjectName("modelListLabel")
+        self.modelList = QtWidgets.QListWidget(self.centralwidget)#FOR THE MODELLIST
+        self.modelList.setGeometry(QtCore.QRect(925, 475, 300, 600))
+        self.modelList.setObjectName("modelList")
+        self.attackListLabel = QtWidgets.QLabel(self.centralwidget)#FOR THE ATTACKLISTLABEL
+        self.attackListLabel.setGeometry(QtCore.QRect(1250, 440, 150, 30))
+        self.attackListLabel.setObjectName("attackListLabel")
+        self.attackList = QtWidgets.QListWidget(self.centralwidget)#FOR THE ATTACKLIST
+        self.attackList.setGeometry(QtCore.QRect(1250, 475, 300, 600))
+        self.attackList.setObjectName("attackList")
+        self.dataListLabel = QtWidgets.QLabel(self.centralwidget)#FOR THE DATALIST LABEL
+        self.dataListLabel.setGeometry(QtCore.QRect(20, 440, 150, 30))
+        self.dataListLabel.setObjectName("dataListLabel")
+        self.datasetList = QtWidgets.QListWidget(self.centralwidget)#FOR THE DATALIST
+        self.datasetList.setGeometry(QtCore.QRect(20, 475, 300, 600))
+        self.datasetList.setObjectName("datasetList")
+        self.dataButton = QtWidgets.QPushButton(self.centralwidget)#FOR THE DATALIST DOWNLOAD BUTTON
+        self.dataButton.setGeometry(QtCore.QRect(350, 550, 230, 60))
+        self.dataButton.setObjectName("dataButton")
+        self.algoButton = QtWidgets.QPushButton(self.centralwidget)#FOR THE ALGORITHM SUBMISSION BUTTON
+        self.algoButton.setGeometry(QtCore.QRect(1000, 220, 350, 60))
+        self.algoButton.setObjectName("algoButton")
+        self.algoLabel = QtWidgets.QLabel(self.centralwidget)#FOR THE ALGORITHM LABEL
+        self.algoLabel.setGeometry(QtCore.QRect(1400, 180, 240, 40))
+        self.algoLabel.setObjectName("algoLabel")
+        self.algoText = QtWidgets.QTextEdit(self.centralwidget)#FOR THE ALGORITHM TEXTBOX
+        self.algoText.setGeometry(QtCore.QRect(1400, 220, 400, 60))
+        self.algoText.setObjectName("algoName")
         self.loadDatasets()
+        self.attackBttn = QtWidgets.QPushButton(self.centralwidget)#FOR THE ATTACK BUTTON
+        self.attackBttn.setGeometry(QtCore.QRect(1600, 750, 200, 60))
+        self.attackBttn.setObjectName("attackButton")
+        self.updateListBttn = QtWidgets.QPushButton(self.centralwidget)#FOR THE UPDATELIST BUTTON
+        self.updateListBttn.setGeometry(QtCore.QRect(350, 750, 230, 60))
+        self.updateListBttn.setObjectName("updateListButton")
+        self.attackInfoLabel = QtWidgets.QLabel(self.centralwidget)#FOR THE ATTACK INFORMATION
+        self.attackInfoLabel.setGeometry(QtCore.QRect(600, 410, 1220, 30))
+        self.attackInfoLabel.setObjectName("attackInfoLabel")
+        self.errorDisplay = QtWidgets.QTextEdit(self.centralwidget)
+        self.errorDisplay.setGeometry(QtCore.QRect(0, 1200, 1900, 200))
+        self.errorDisplay.setReadOnly(True)
+        self.errorDisplay.setObjectName("errorDisplay")
         UWMWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(UWMWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 447, 22))
@@ -85,3 +122,28 @@ class Ui_UWMWindow(object):
         self.dataButton.setText(_translate("UWMWindow", "get Dataset"))
         self.modelLabel.setText(_translate("UWMWindow", "Model Name"))
         self.modelALabel.setText(_translate("UWMWindow", "Accuracy"))
+        self.algoButton.setText(_translate("UWMWindow", "Submit an algorithm"))
+        self.algoLabel.setText(_translate("UWMWindow", "Algorithm FileName"))
+        self.dataButton.setText(_translate("UWMWindow", "Download Dataset"))        
+        self.updateListBttn.setText(_translate("UWMWindow", "Update Lists"))
+        self.attackBttn.setText(_translate("UWMWindow", "Attack"))
+        self.modelListLabel.setText(_translate("UWMWindow", "Model List"))
+        self.imageListLabel.setText(_translate("UWMWindow", "Image List"))
+        self.attackListLabel.setText(_translate("UWMWindow", "Attack List"))
+        self.attackInfoLabel.setText(_translate("UWMWindow", "Please Choose and Image, user submitted model, and an attack algorithm in order to make an attack."))
+        self.dataListLabel.setText(_translate("UWMWindow", "Data List"))
+        self.errorDisplay.setHtml(_translate("SUWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.1pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'MS Shell Dlg 2\';\"></span></p></body></html>"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    UWMWindow = QtWidgets.QMainWindow()
+    ui = Ui_UWMWindow()
+    ui.setupUi(UWMWindow)
+    UWMWindow.show()
+    sys.exit(app.exec_())
