@@ -6,7 +6,7 @@ import threading
 print_lock = threading.Lock()
 
 BUFFER_SIZE = 4096 # send 4096 bytes each time step
-mode = "Gray"
+mode = "White"
 uName = ""
 mAccuracy = 0
 def clientMain(c):
@@ -18,8 +18,6 @@ def clientMain(c):
         try:
             message = str(data.decode('ascii'))
             message = message.lower().strip()
-            if not message:
-                print('Bye')
             print('Received from the client:',message)
             if message == "submitmodel":
                 ready = "ready"
@@ -110,9 +108,14 @@ def clientMain(c):
                 sendAttacks(c)
             elif message == "getimagesready":
                 sendImages(c)
-        except:
-            print('Lost connection to the client')
-            return
+            elif message == "ready":
+                continue
+            else:
+                print("not a proper message,", message)
+                c.close()
+                continue
+        except Exception as e:
+            print('Lost connection to the client because of ', e)
 
 def storeImage(c, fs, fn):
     import imagesDB as IDB
@@ -131,8 +134,8 @@ def storeImage(c, fs, fn):
                 total += BUFFER_SIZE
             f.close()
         IDB.registerImage(uName,fn)
-    except:
-        print("could not receive all of the image")
+    except Exception as e:
+        print("could not receive all of the image. Or, ", e)
        
 def storeModel(c, fs, fn):
     import modelsDB as MDB
@@ -152,8 +155,8 @@ def storeModel(c, fs, fn):
                 total += BUFFER_SIZE
             f.close()
         MDB.registerModel(uName,fn,mAccuracy)
-    except:
-        print("could not receive all of the model")
+    except Exception as e:
+        print("could not receive all of the model. Or, ",e)
 
 def storeDataset(c, fs, fn):
     try:
@@ -169,8 +172,8 @@ def storeDataset(c, fs, fn):
                     f.write(bytes_read)
                 total += BUFFER_SIZE
             f.close()
-    except:
-        print("could not receive all of the model")     
+    except Exception as e:
+        print("could not receive all of the model. Or, ", e)     
         
 def storeAttack(c, fs, fn):
     import aAlgorithmsDB as AADB
@@ -189,8 +192,8 @@ def storeAttack(c, fs, fn):
                 total += BUFFER_SIZE
             f.close()
         AADB.registerAttack(uName, fn)
-    except:
-        print("could not receive all of the model") 
+    except Exception as e:
+        print("could not receive all of the model. Or, ", e) 
 
 def sendDataset(c, fn):
         direct = "Datasets/"
@@ -210,36 +213,38 @@ def sendDataset(c, fn):
                                         if i == 0:
                                                 c.sendall(bytes_read)
                                 f.close()
-        except:
-                print("There was an error with the filename. Please try another one or type it in correctly.")
+        except Exception as e:
+                print("There was an error with the filename. Please try another one or type it in correctly. Or, ",e)
 
 def sendBoard(c):
     import leaderboardDB as LDB
-    info = LDB.getLeaderboard()
-    i = 0
-    j = 0
-    while i < 20:
+    try:
+        info = LDB.getLeaderboard()
+        i = 0
         j = 0
-        while j < len(info[i]):
-            response = c.recv(1024)#wait for the server response to be ready
-            if str(response.decode()) == 'ready':
-                c.send(info[i][j].encode())
-            j += 1
-        i += 1
-  
+        while i < len(info) and i < 20:
+            j = 0
+            while j < len(info[i]):
+                response = c.recv(1024)#wait for the server response to be ready
+                if str(response.decode()) == 'ready':
+                    c.send(info[i][j].encode())
+                j += 1
+            i += 1
+        bye = "bye"
+        c.send(bye.encode())
+    except Exception as e:
+        print(e)
 def sendAttacks(c):
     import aAlgorithmsDB as AADB
     try:
         info = AADB.getAttacks()
         i = 0
         while i < len(info):
-            response = c.recv(1024)#wait for the server response to be ready
-            if str(response.decode()) == 'ready':
-                c.send(info[i][0].encode())
+            c.send(info[i][0].encode())
             i += 1
         bye = "bye"
         c.send(bye.encode())
-    except Exception as error:
+    except Exception as e:
         print(e)
 
 def sendModels(c):
@@ -255,9 +260,12 @@ def sendModels(c):
         while i < len(info):
             c.send(info[i][0].encode())
             i += 1
+            response = c.recv(1024)#wait for the server response to be ready
+            if str(response.decode()) == 'ready':
+                continue
         bye = "bye"
         c.send(bye.encode())
-    except Exception as error:
+    except Exception as e:
         print(e)
         
 def sendImages(c):
@@ -270,18 +278,24 @@ def sendImages(c):
             i += 1
         bye = "bye"
         c.send(bye.encode())
-    except Exception as error:
+    except Exception as e:
         print(e)
 
 def updateMode(c):
-    ready = "ready"
-    c.send(ready.encode('ascii'))
-    newMode = c.recv(32)
-    global mode
-    mode = str(newMode.decode('ascii'))
+    try:
+        ready = "ready"
+        c.send(ready.encode('ascii'))
+        newMode = c.recv(32)
+        global mode
+        mode = str(newMode.decode('ascii'))
+    except Exception as e:
+        print(e)
 
 def sendMode(c):
-    c.send(mode.encode('ascii'))
+    try:
+        c.send(mode.encode('ascii'))
+    except Exception as e:
+        print(e)
 
 def Main():
     host = ""

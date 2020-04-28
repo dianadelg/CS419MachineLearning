@@ -37,7 +37,6 @@ class Ui_CWindow(object):
         self.statusbar = QtWidgets.QStatusBar(CWindow)
         self.statusbar.setObjectName("statusbar")
         CWindow.setStatusBar(self.statusbar)
-
         self.retranslateUi(CWindow)
         QtCore.QMetaObject.connectSlotsByName(CWindow)
 

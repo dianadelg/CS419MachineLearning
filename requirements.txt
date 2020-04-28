@@ -3,5 +3,4 @@ pytorch
 adversarial robustness toolbox (ART)
 NumPy
 pyqt5-tools
-maybe tensorflow/keras
-DB Browser
+DBBrowser for SQLITE to look into the database

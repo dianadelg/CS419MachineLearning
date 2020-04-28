@@ -1,6 +1,7 @@
 import socket
 import login as user
 import os
+import time
 global server
 
 BUFFER_SIZE1 = 4096 # send 4096 bytes for the models
@@ -122,10 +123,8 @@ def submitDataset(DS):
                                                 if i == 0:
                                                         server.sendall(bytes_read)
                                         f.close()
-                        return True
                 except Exception as e:
                         print("There was an error with the filename. Please try another one or type it in correctly. Or,",e)
-                        return False
 
 def getDataset(FN):
     global server
@@ -150,7 +149,11 @@ def getDataset(FN):
                 f.close()
     except Exception as e:
         print(e)
-         
+def startAttack(modelN, imageN, attackName):
+    message = "ready"
+    server.send(message.encode('ascii'))
+    time.sleep(2)
+   
 def getBoard():
     global server
     try:
@@ -162,9 +165,10 @@ def getBoard():
             ready = "ready"
             server.send(ready.encode())
             table = server.recv(64)#wait for the server response to be ready
-            body.append(str(table.decode()))
-            if len(body)/i == 20:
-               return body
+            if str(table.decode()) == "bye":
+                return body
+            else:
+                body.append(str(table.decode()))
     except Exception as e:
         print("error getting the board information or", e)
         
@@ -175,8 +179,6 @@ def getAttacks():
         server.send(message.encode('ascii'))
         body = []
         while True:
-            ready = "ready"
-            server.send(ready.encode('ascii'))
             table = server.recv(64)#wait for the server response to be ready
             if str(table.decode()) == "bye":
                 return body
@@ -197,6 +199,8 @@ def getModels():
                 return body
             else:
                 body.append(str(table.decode()))
+                ready = "ready"
+                server.send(ready.encode())
     except Exception as e:
         print("error getting the board information or", e)
 
