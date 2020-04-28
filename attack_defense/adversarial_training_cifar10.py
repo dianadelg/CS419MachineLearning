@@ -1,3 +1,4 @@
+# example from https://github.com/IBM/adversarial-robustness-toolbox/examples
 # -*- coding: utf-8 -*-
 """
 Trains a convolutional neural network on the CIFAR-10 dataset, then generated adversarial images using the

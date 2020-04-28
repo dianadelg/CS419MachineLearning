@@ -1,3 +1,5 @@
+# example from https://github.com/IBM/adversarial-robustness-toolbox/examples
+
 """
 The script demonstrates a simple example of using ART with PyTorch. The example train a small model on the MNIST dataset
 and creates adversarial examples using the Fast Gradient Sign Method. Here we use the ART classifier to train the model,

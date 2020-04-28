@@ -1,3 +1,5 @@
+# example from https://github.com/IBM/adversarial-robustness-toolbox/examples
+
 # -*- coding: utf-8 -*-
 """Generates a backdoor for MNIST dataset, then trains a convolutional neural network on the poisoned dataset,
  and runs activation defence to find poison."""
