@@ -11,6 +11,7 @@ from User import Ui_UWindow
 from UserBM import Ui_UBMWindow
 from UserWM import Ui_UWMWindow
 from leaderboard import Ui_LWindow
+import datasetDB as DDB
 import clientConnect as C
 import login as L
 
@@ -28,14 +29,12 @@ class SIWindow(QtWidgets.QMainWindow, Ui_SIWindow):
         super(SIWindow, self).__init__(parent)
         self.setupUi(self)
         self.backBttn.clicked.connect(self.hide)
-        self.signBttn.clicked.connect(self.hide)
 
 class SUWindow(QtWidgets.QMainWindow, Ui_SUWindow):
     def __init__(self, parent=None):
         super(SUWindow, self).__init__(parent)
         self.setupUi(self)
         self.backBttn.clicked.connect(self.hide)
-        self.signBttn.clicked.connect(self.hide)
 
 class AGMWindow(QtWidgets.QMainWindow, Ui_AGMWindow):
     def __init__(self, parent=None):
@@ -110,7 +109,6 @@ class Manager:
         self.fourth.updateButton.clicked.connect(self.updateModeG)
         self.fourth.dataButton.clicked.connect(self.submitDatasetG)
         self.fourth.modelButton.clicked.connect(self.submitModelG) 
-        self.fourth.boardButton.clicked.connect(self.tenth.show)
         self.fourth.constraintsButton.clicked.connect(self.submitConstraints)
 ############All of the button programming for the Admin WM screen######
         self.fifth.signOutButton.clicked.connect(self.second.show)
@@ -118,13 +116,11 @@ class Manager:
         self.fifth.updateButton.clicked.connect(self.updateModeW)
         self.fifth.dataButton.clicked.connect(self.submitDatasetW)
         self.fifth.modelButton.clicked.connect(self.submitModelW) 
-        self.fifth.boardButton.clicked.connect(self.tenth.show)
 ############All of the button programming for the Admin BM screen######
         self.sixth.signOutButton.clicked.connect(self.second.show)
         self.sixth.updateButton.clicked.connect(self.second.show)
         self.sixth.updateButton.clicked.connect(self.updateModeB)
         self.sixth.dataButton.clicked.connect(self.submitDatasetB)
-        self.sixth.boardButton.clicked.connect(self.tenth.show)
 ############All of the button programming for the User GM screen######
         self.seventh.signOutButton.clicked.connect(self.second.show)
         self.seventh.boardButton.clicked.connect(self.tenth.show)
@@ -134,6 +130,7 @@ class Manager:
         self.seventh.modelButton.clicked.connect(self.submitModelS)
         self.seventh.dataButton.clicked.connect(self.getDatasetS)
         self.seventh.updateListBttn.clicked.connect(self.updateLists)
+        self.seventh.attackBttn.clicked.connect(self.startAttackS)
 ############All of the button programming for the User WM screen#######
         self.eigth.signOutButton.clicked.connect(self.second.show)
         self.eigth.boardButton.clicked.connect(self.tenth.show)
@@ -143,10 +140,11 @@ class Manager:
         self.eigth.algoButton.clicked.connect(self.submitAttackE)
         self.eigth.dataButton.clicked.connect(self.getDatasetE)
         self.eigth.updateListBttn.clicked.connect(self.updateListsE)
+        self.eigth.attackBttn.clicked.connect(self.startAttackE)
 ############All of the button programming for the User BM screen#######
         self.ninth.signOutButton.clicked.connect(self.second.show)
-        self.ninth.boardButton.clicked.connect(self.getData)
         self.ninth.boardButton.clicked.connect(self.tenth.show)
+        self.ninth.boardButton.clicked.connect(self.getData)
         self.ninth.updateListBttn.clicked.connect(self.updateLists)
         self.ninth.updateListBttn.clicked.connect(self.updateLists)
         self.ninth.fileButton.clicked.connect(self.submitImageN)
@@ -154,6 +152,7 @@ class Manager:
         self.ninth.dataButton.clicked.connect(self.getDatasetN)
         self.ninth.algoButton.clicked.connect(self.submitAttackN)
         self.ninth.updateListBttn.clicked.connect(self.updateListsN)
+        self.ninth.attackBttn.clicked.connect(self.startAttackN)
 ###########All of the button programming for Leaderboard screen########
         self.tenth.updateBttn.clicked.connect(self.getData)
 #######################################################################
@@ -173,18 +172,21 @@ class Manager:
                    self.loadModels()
                    self.loadImages()
                    self.seventh.userWelcome.setText(user)
+                   self.second.hide()
                    self.seventh.show()
                 elif mode == "White":
                    self.loadModelsE()
                    self.loadAttacksE()
                    self.loadImagesE()
                    self.eigth.userWelcome.setText(user)
+                   self.second.hide()
                    self.eigth.show()
                 elif mode == "Black":
                    self.loadModelsN()
                    self.loadAttacksN()
                    self.loadImagesN()
                    self.ninth.userWelcome.setText(user)
+                   self.second.hide()
                    self.ninth.show()
             elif res == "admin":
                 self.second.userText.clear()
@@ -193,12 +195,15 @@ class Manager:
                 if mode == "Gray":
                     self.fourth.userWelcome.setText(user)
                     self.fourth.show()
+                    self.second.hide()
                 elif mode == "White":
                     self.fifth.userWelcome.setText(user)
                     self.fifth.show()
+                    self.second.hide()
                 elif mode == "Black":
                     self.sixth.userWelcome.setText(user)
                     self.sixth.show()
+                    self.second.hide()
             else:
                 self.second.userText.clear()
                 self.second.passText.clear()
@@ -207,51 +212,60 @@ class Manager:
             print(e)
 #################################################################
     def loginCheckU(self):
-        user = self.third.userText.toPlainText().strip()
-        passw = self.third.passText.toPlainText().strip()
-        con = self.third.conText.toPlainText()
-        if con == passw:
-            res = L.register_DB(user,passw)
-            if res == "user":
-                self.third.userText.clear()
-                self.third.passText.clear()
-                mode = C.getMode()
-                if mode == "Gray":
-                    self.loadAttacks()
-                    self.loadModels()
-                    self.loadImages()
-                    self.seventh.userWelcome.setText(user)
-                    self.seventh.show()
-                elif mode == "White":
-                    self.loadAttacksE()
-                    self.loadModelsE()
-                    self.loadImagesE()
-                    self.eigth.userWelcome.setText(user)
-                    self.eigth.show()
-                elif mode == "Black":
-                    self.loadAttacksN()
-                    self.loadModelsN()
-                    self.loadImagesN()
-                    self.ninth.userWelcome.setText(user)
-                    self.ninth.show()
-            elif res == "admin":
-                self.third.userText.clear()
-                self.third.passText.clear()
-                mode = C.getMode()
-                if mode == "Gray":
-                     self.fourth.userWelcome.setText(user)
-                     self.fourth.show()
-                elif mode == "White":
-                    self.fifth.userWelcome.setText(user)
-                    self.fifth.show()
-                elif mode == "Black":
-                    self.sixth.userWelcome.setText(user)
-                    self.sixth.show()
+        try:
+            user = self.third.userText.toPlainText().strip()
+            passw = self.third.passText.toPlainText().strip()
+            con = self.third.conText.toPlainText()
+            if con == passw:
+                res = L.register_DB(user,passw)
+                if res == "user":
+                    self.third.userText.clear()
+                    self.third.passText.clear()
+                    mode = C.getMode()
+                    if mode == "Gray":
+                        self.loadAttacks()
+                        self.loadModels()
+                        self.loadImages()
+                        self.seventh.userWelcome.setText(user)
+                        self.third.hide()
+                        self.seventh.show()
+                    elif mode == "White":
+                        self.loadAttacksE()
+                        self.loadModelsE()
+                        self.loadImagesE()
+                        self.eigth.userWelcome.setText(user)
+                        self.third.hide()
+                        self.eigth.show()
+                    elif mode == "Black":
+                        self.loadAttacksN()
+                        self.loadModelsN()
+                        self.loadImagesN()
+                        self.ninth.userWelcome.setText(user)
+                        self.third.hide()
+                        self.ninth.show()
+                elif res == "admin":
+                    self.third.userText.clear()
+                    self.third.passText.clear()
+                    mode = C.getMode()
+                    if mode == "Gray":
+                         self.fourth.userWelcome.setText(user)
+                         self.third.hide()
+                         self.fourth.show()
+                    elif mode == "White":
+                        self.fifth.userWelcome.setText(user)
+                        self.third.hide()
+                        self.fifth.show()
+                    elif mode == "Black":
+                        self.sixth.userWelcome.setText(user)
+                        self.third.hide()
+                        self.sixth.show()
             else:
                 self.third.userText.clear()
                 self.third.passText.clear()
                 self.third.conText.clear()
                 self.third.errorDisplay.setText("ERROR: Your passwords do not match. Please fix them!!!")
+        except Exception as e:
+            print(e)
 ########################################################################
     def updateModeG(self):
         newMode = self.fourth.gamemodes.currentText()
@@ -269,18 +283,17 @@ class Manager:
             if sM != "" and sMA != "":
                 sMA = int(sMA)
                 C.submitModel(sM, self.fourth.userWelcome.text(),sMA)
-        except:
-            print("You're missing information")
+        except Exception as e:
+            print("You're missing information or ", e)
             
     def submitDatasetG(self):
         try:
             sD = self.fourth.dataText.toPlainText().strip()
             if sD != "":
-                res = C.submitDataset(sD)
-                if res == True:
-                    DDB.registerDataset(self.fourth.userWelcome.text(),sD)
-        except:
-            print("You're missing information")
+                C.submitDataset(sD)
+                DDB.registerDataset(self.fourth.userWelcome.text(),sD)
+        except Exception as e:
+            print("You're missing information or ", e)
     def submitConstraints(self):
         op = self.fourth.outputText.toPlainText().strip()
         freq = self.fourth.frequencyText.toPlainText().strip()
@@ -315,11 +328,10 @@ class Manager:
         try:
             sD = self.fifth.dataText.toPlainText().strip()
             if sD != "":
-                res = C.submitDataset(sD)
-                if res == True:
-                    DDB.registerDataset(self.fifth.userWelcome.text(),sD)
-        except:
-            print("You're missing information")
+                C.submitDataset(sD)
+                DDB.registerDataset(self.fifth.userWelcome.text(),sD)
+        except Exception as e:
+            print("You're missing information, or ", e)
     
     def submitModelW(self):
         try:
@@ -328,8 +340,8 @@ class Manager:
             if sM != "" and sMA != "":
                 sMA = int(sMA)
                 C.submitModel(sM, self.fifth.userWelcome.text(),sMA)
-        except:
-            print("You're missing information")     
+        except Exception as e:
+            print("You're missing information, or ", e)              
 ########################################################################
     def updateModeB(self):
         newMode = self.sixth.gamemodes.currentText()
@@ -345,11 +357,10 @@ class Manager:
         try:
             sD = self.sixth.dataText.toPlainText().strip()
             if sD != "":
-                res = C.submitDataset(sD)
-                if res == True:
-                    DDB.registerDataset(self.fifth.userWelcome.text(),sD)
-        except:
-            print("You're missing information")
+                C.submitDataset(sD)
+                DDB.registerDataset(self.fifth.userWelcome.text(),sD)
+        except Exception as e:
+            print("You're missing information, or ", e)
                 
 #################################################################           
     def submitImageS(self):
@@ -377,19 +388,19 @@ class Manager:
             sMA = self.seventh.modelTextA.toPlainText().strip()
             if sM != "" and sMA != "":
                 sMA = int(sMA)
-                C.submitModel(sM, self.userWelcome.text(),sMA)
+                C.submitModel(sM, self.seventh.userWelcome.text(),sMA)
                 self.seventh.errordisplay.append("Model Submitted Successfully.")
         except Exception as e:
             self.seventh.errordisplay.append("You're missing information or ", e)
     def getDatasetS(self):
         try:
             self.seventh.errordisplay.append("Downloading Dataset....")
-            dataName = self.eigth.datasetList.currentItem().text()
+            dataName = self.seventh.datasetList.currentItem().text()
             if dataName != "":
-               C.getDatasets(dataName)
+               C.getDataset(dataName)
                self.seventh.errordisplay.append("Dataset Downloaded Successfully.")
-        except:
-            self.seventh.errordisplay.append("Nothing is selected or ", e)
+        except Exception as e:
+            print("Nothing is selected or ", e)
     def loadAttacks(self):
         try:
             attackList = C.getAttacks()
@@ -403,14 +414,21 @@ class Manager:
             for x in modelList:
                 self.seventh.modelList.addItem(x)
         except Exception as e:
-            self.seventh.errordisplay.append(e)
+            print(e)
     def loadImages(self):
         try:
             imageList = C.getImages()
             for x in imageList:
                 self.seventh.imageList.addItem(x)
         except Exception as e:
-            self.seventh.errordisplay.append(e)
+            print(e)
+    def loadDatasetsS(self):
+        try:
+            dataList = DDB.getDatasets()
+            for x in dataList:
+                self.seventh.datasetList.addItem(x[0])
+        except Exception as e:
+            print(e)
     def updateLists(self):
         try:
             self.seventh.errordisplay.append("Updating List....")
@@ -420,9 +438,20 @@ class Manager:
             self.loadModels()
             self.seventh.imageList.clear()
             self.loadImages()
+            self.seventh.datasetList.clear()
+            self.loadDatasetsS()
             self.seventh.errordisplay.append("Updated Successfully.")
         except Exception as e:
-            self.seventh.errordisplay.append(e)
+            print(e)
+    def startAttackS(self):
+        try:
+            mN = self.seventh.modelList.currentItem().text()
+            iN = self.seventh.imageList.currentItem().text()
+            aN = self.seventh.attackList.currentItem().text()
+            C.startAttack(mN, iN, aN)
+            self.seventh.errordisplay.append("Attack Successful.")
+        except Exception as e:
+            print("Nothing is selected or ", e)       
 #################################################################
     def submitImageE(self):
         try:
@@ -456,9 +485,9 @@ class Manager:
     def getDatasetE(self):
         try:
             self.eigth.errordisplay.append("Downloading Dataset....")
-            dataName = self.seventh.datasetList.currentItem().text()
+            dataName = self.eigth.datasetList.currentItem().text()
             if dataName != "":
-               C.getDatasets(dataName)
+               C.getDataset(dataName)
                self.eigth.errordisplay.append("Dataset Downloaded Successfully.")
         except Exception as e:
             self.eigth.errordisplay.append("Nothing is selected or ", e)
@@ -483,18 +512,36 @@ class Manager:
                 self.eigth.imageList.addItem(x)
         except Exception as e:
             self.eigth.errordisplay.append(e)
+    def loadDatasetsE(self):
+        try:
+            dataList = DDB.getDatasets()
+            for x in dataList:
+                self.eigth.datasetList.addItem(x[0])
+        except Exception as e:
+            self.eigth.errordisplay.append(e)
     def updateListsE(self):
         try:
             self.eigth.errordisplay.append("Updating List....")
             self.eigth.attackList.clear()
-            self.loadAttacks()
+            self.loadAttacksE()
             self.eigth.modelList.clear()
-            self.loadModels()
+            self.loadModelsE()
             self.eigth.imageList.clear()
-            self.loadImages()
+            self.loadImagesE()
+            self.eigth.datasetList.clear()
+            self.loadDatasetsE()
             self.eigth.errordisplay.append("Updated Successfully.")
         except Exception as e:
             self.eigth.errordisplay.append(e)
+    def startAttackE(self):
+        try:
+            mN = self.eigth.modelList.currentItem().text()
+            iN = self.eigth.imageList.currentItem().text()
+            aN = self.eigth.attackList.currentItem().text()
+            C.startAttack(mN, iN, aN)
+            self.eigth.errordisplay.append("Attack Successful.")
+        except Exception as e:
+            print("Missing information or ", e)  
 ########################################################################
     def submitImageN(self):
         try:
@@ -530,7 +577,7 @@ class Manager:
             self.ninth.errordisplay.append("Downloading Dataset....")
             dataName = self.ninth.datasetList.currentItem().text()
             if dataName != "":
-               C.getDatasets(dataName)
+               C.getDataset(dataName)
                self.ninth.errordisplay.append("Dataset Downloaded Successfully.")
         except Exception as e:
             self.ninth.errordisplay.append("Nothing is selected or ", e)
@@ -556,24 +603,43 @@ class Manager:
                 self.ninth.imageList.addItem(x)
         except Exception as e:
             self.ninth.errordisplay.append(e)
+    def loadDatasetsN(self):
+        try:
+            dataList = DDB.getDatasets()
+            for x in dataList:
+                self.ninth.datasetList.addItem(x[0])
+        except Exception as e:
+            self.ninth.errordisplay.append(e)
     def updateListsN(self):
         try:
             self.ninth.errordisplay.append("Updating List....")
             self.ninth.attackList.clear()
-            self.loadAttacks()
+            self.loadAttacksN()
             self.ninth.modelList.clear()
-            self.loadModels()
+            self.loadModelsN()
             self.ninth.imageList.clear()
-            self.loadImages()
+            self.loadImagesN()
+            self.ninth.datasetList.clear()
+            self.loadDatasetsN()
             self.ninth.errordisplay.append("Updated Successfully.")
         except Exception as e:
             self.ninth.errordisplay.append(e)
+    def startAttackN(self):
+        try:
+            mN = self.ninth.modelList.currentItem().text()
+            iN = self.ninth.imageList.currentItem().text()
+            aN = self.ninth.attackList.currentItem().text()
+            C.startAttack(mN, iN, aN)
+            self.ninth.errordisplay.append("Attack Successful.")
+        except Exception as e:
+            print("Missing information or ", e)  
 ########################################################################
     def getData(self):
         table = C.getBoard()
         i = 0
         r = 0
         c = 0
+        self.tenth.leaderboardDisplay.clearContents()
         for x in table:
             if r == 20:
                 return

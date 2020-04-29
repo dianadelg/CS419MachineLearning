@@ -13,7 +13,7 @@ class Ui_UWMWindow(object):
 
     def setupUi(self, UWMWindow):
         UWMWindow.setObjectName("UWMWindow")
-        UWMWindow.resize(1900, 1400)
+        UWMWindow.resize(1900, 1500)
         self.centralwidget = QtWidgets.QWidget(UWMWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.userWelcome = QtWidgets.QLineEdit(self.centralwidget)
@@ -96,10 +96,10 @@ class Ui_UWMWindow(object):
         self.attackInfoLabel = QtWidgets.QLabel(self.centralwidget)#FOR THE ATTACK INFORMATION
         self.attackInfoLabel.setGeometry(QtCore.QRect(600, 410, 1220, 30))
         self.attackInfoLabel.setObjectName("attackInfoLabel")
-        self.errorDisplay = QtWidgets.QTextEdit(self.centralwidget)
-        self.errorDisplay.setGeometry(QtCore.QRect(0, 1200, 1900, 200))
-        self.errorDisplay.setReadOnly(True)
-        self.errorDisplay.setObjectName("errorDisplay")
+        self.errordisplay = QtWidgets.QTextEdit(self.centralwidget)
+        self.errordisplay.setGeometry(QtCore.QRect(0, 1200, 1900, 200))
+        self.errordisplay.setReadOnly(True)
+        self.errordisplay.setObjectName("errorDisplay")
         UWMWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(UWMWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 447, 22))
@@ -132,7 +132,7 @@ class Ui_UWMWindow(object):
         self.attackListLabel.setText(_translate("UWMWindow", "Attack List"))
         self.attackInfoLabel.setText(_translate("UWMWindow", "Please Choose and Image, user submitted model, and an attack algorithm in order to make an attack."))
         self.dataListLabel.setText(_translate("UWMWindow", "Data List"))
-        self.errorDisplay.setHtml(_translate("SUWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        self.errordisplay.setHtml(_translate("SUWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:\'MS Shell Dlg 2\'; font-size:8.1pt; font-weight:400; font-style:normal;\">\n"
